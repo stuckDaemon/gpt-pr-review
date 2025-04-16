@@ -10,15 +10,15 @@ This repo demonstrates how to use OpenAI's ChatGPT to automatically review pull 
 ```
 .
 ├── code
-│ └── example.ts                      # Sample TypeScript function (used to test the review)
+│ └── example.ts                    # Sample TypeScript function (used to test the review)
 ├── scripts
 │   └── code-review
-│       ├── index.ts                    # The main TypeScript review script
-│       ├── package.json                # Local dependencies for the review script
-│       ├── tsconfig.json              # TypeScript config
+│       ├── index.ts          # The main TypeScript review script
+│       ├── package.json      # Local dependencies for the review script
+│       ├── tsconfig.json     # TypeScript config
 │       └── yarn.lock
 └── workflows
-└── chatgpt-review.yml             # GitHub Actions workflow that runs the review
+└── chatgpt-review.yml              # GitHub Actions workflow that runs the review
 ```
 
 ---
