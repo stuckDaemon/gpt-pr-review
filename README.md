@@ -1,12 +1,8 @@
-Here’s a clean and clear `README.md` for your repo, explaining how to use your ChatGPT-powered code review workflow:
 
----
-
-```markdown
 # 🤖 ChatGPT Code Review Bot
 
 This repo demonstrates how to use OpenAI's ChatGPT to automatically review pull requests in a GitHub repository. It leverages GitHub Actions, the OpenAI API, and a TypeScript script to analyze code changes and post a summary directly to the PR.
-```
+
 ---
 
 ## 📁 Project Structure
