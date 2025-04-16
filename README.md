@@ -135,7 +135,3 @@ OPENAI_API_KEY=your_key_here GITHUB_TOKEN=your_token_here yarn review
 
 MIT (add it in `package.json` too if you want to avoid warnings)
 ```
-
----
-
-Let me know if you'd like to turn this into a template repo, add screenshots of the PR comment, or tweak the language for a more formal tone.
