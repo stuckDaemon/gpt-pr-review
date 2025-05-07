@@ -3,13 +3,16 @@ import * as github from '@actions/github';
 import OpenAI from 'openai';
 import { Octokit } from '@octokit/rest';
 
+// Rough token estimator: 1 token ≈ 4 characters
+function estimateTokens(text: string): number {
+  return Math.ceil(text.length / 4);
+}
+
 const run = async () => {
   try {
     const openaiApiKey = process.env.OPENAI_API_KEY!;
     const githubToken = process.env.GITHUB_TOKEN!;
-    const openai = new OpenAI({
-      apiKey: openaiApiKey
-    });
+    const openai = new OpenAI({ apiKey: openaiApiKey });
     const octokit = new Octokit({ auth: githubToken });
 
     const context = github.context;
@@ -45,7 +48,14 @@ Please:
 
 Code diff:
 ${codeDiffs}
-    `;
+    `.trim();
+
+    const tokenEstimate = estimateTokens(prompt);
+
+    if (tokenEstimate > 8000) { // stay below the model limit (8192) to be safe
+      core.warning(`Skipping AI review: Estimated token count ${tokenEstimate} exceeds limit.`);
+      return; // Exit gracefully without marking the PR as failed
+    }
 
     const response = await openai.chat.completions.create({
       model: 'gpt-4',
@@ -64,7 +74,8 @@ ${codeDiffs}
 
     core.info('Review posted to PR.');
   } catch (error: any) {
-    core.setFailed(error.message);
+    core.warning(`AI review failed: ${error.message}`);
+    // Do not call core.setFailed, just warn — keeps the PR check green
   }
 };
 
